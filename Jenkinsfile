@@ -24,7 +24,9 @@ pipeline {
         }
         stage('docker-build') {
             steps {
-                sh 'docker build -t  example .'
+                echo "build docker image and push to docker repository"
+                sh 'docker build -t  my-image .'
+                sh 'docker push my-image'
             }
         }
     }
