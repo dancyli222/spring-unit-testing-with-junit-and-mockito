@@ -13,20 +13,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
+                sh 'mvn org.jacoco:jacoco-maven-plugin:prepare-agent test'
             }
             post {
                 always {
                     archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                     junit 'target/surefire-reports/*.xml'
-                }
-            }
-        }
-        stage('Docker-build') {
-            steps {
-                echo "build docker image and push to docker repository"
-                script{
-                    sh "docker build -t  my-image ."
                 }
             }
         }
