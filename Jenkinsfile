@@ -24,7 +24,7 @@ pipeline {
         }
         stage('docker-build') {
             steps {
-                sh 'sudo docker build -t  example .'
+                sh 'docker build -t  example .'
             }
         }
     }
