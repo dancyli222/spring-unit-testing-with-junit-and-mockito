@@ -6,14 +6,6 @@ pipeline {
         }
     }
     stages {
-        stage('init') {
-           steps {
-            script{
-              def dockerPath = tool 'docker' //全局配置里的docker
-              env.PATH = "${dockerPath}/bin:${env.PATH}" //添加了系统环境变量上
-            }
-        }
-    }
         stage('Build') {
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -33,7 +25,9 @@ pipeline {
         stage('Docker-build') {
             steps {
                 echo "build docker image and push to docker repository"
-                sh 'docker build -t  my-image .'
+                script{
+                    sh "docker build -t  my-image ."
+                }
             }
         }
     }
