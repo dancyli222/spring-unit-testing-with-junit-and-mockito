@@ -17,7 +17,7 @@ pipeline {
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'build/libs/unit-test.jar', fingerprint: true
+                    archiveArtifacts artifacts: 'unit-test.jar', fingerprint: true
                     junit 'target/surefire-reports/*.xml'
                 }
             }
