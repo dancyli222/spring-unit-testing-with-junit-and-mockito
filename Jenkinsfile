@@ -26,5 +26,6 @@ pipeline {
             steps {
                 sh 'sudo docker build -t  example .'
             }
+        }
     }
 }
