@@ -12,8 +12,10 @@ pipeline {
             }
         }
         stage('Code Analysis with SonarQube') {
-            withSonarQubeEnv(credentialsId: '89aef6769e668fab1dc47af83bd2be021f31f88e', installationName: 'sonar'){
-                sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
+            steps{
+                withSonarQubeEnv(credentialsId: '89aef6769e668fab1dc47af83bd2be021f31f88e', installationName: 'sonar'){
+                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
+                }
             }
         }
         stage('Test') {
