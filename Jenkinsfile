@@ -12,10 +12,8 @@ pipeline {
             }
         }
         stage('Code Analysis with SonarQube') {
-            steps{
-                withSonarQubeEnv(credentialsId: '89aef6769e668fab1dc47af83bd2be021f31f88e', installationName: 'sonar'){
-                    sh 'mvn sonar:sonar'
-                }
+            withSonarQubeEnv(credentialsId: '89aef6769e668fab1dc47af83bd2be021f31f88e', installationName: 'sonar'){
+                sh 'mvn sonar:sonar'
             }
         }
         stage('Test') {
