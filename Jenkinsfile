@@ -11,13 +11,6 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
-        stage('Code analysis with SonarQube'){
-            steps{
-                withSonarQubeEnv('sonar'){
-                    sh 'mvn -f pom.xml clean compile sonar:sonar'
-                }
-            }
-        }
         stage('Test') {
             steps {
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
