@@ -25,11 +25,10 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh 'mvn -DskipTests -Ddocker.tag=latest dockerfile:build'
                 script{
                     sh 'docker build -t myImage .'
                     sh 'docker login xxxxxx -uxx -pxx'
-                    def image = docker.image(imageName)
+                    def image = docker.image(myImage)
                     image.push()
                     image.tag(imageTage)
                     image.push(imageTag)
