@@ -14,13 +14,14 @@ pipeline {
         stage('Code Analysis with SonarQube') {
             steps{
                 withSonarQubeEnv(credentialsId: '89aef6769e668fab1dc47af83bd2be021f31f88e', installationName: 'sonar'){
-                    sh "mvn org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar"
+                    sh 'mvn sonar:sonar'
                 }
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn org.jacoco:jacoco-maven-plugin:prepare-agent test'
+                sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
+                jacoco changeBuildStatus:true,maximumLineCoverage:"20"
             }
             post {
                 always {
