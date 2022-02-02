@@ -23,6 +23,22 @@ pipeline {
                 }
             }
         }
+        stage('Code analysis with SonarQube'){
+            steps{
+                coverage('maven'){
+                    withSonarQubeEnv('sonar'){
+                        sh 'mvn -f pom.xml clean compile sonar:sonar'
+                    }
+                }
+            }
+            stage('mvn构建'){
+                steps{
+                    container('maven'){
+                        sh ' mvn clean package -U -Dmaven.test.skip=true'
+                    }
+                }
+            }
+        }
         stage('Built Docker Image') {
             steps {
                 sh 'build -t my-image .'
