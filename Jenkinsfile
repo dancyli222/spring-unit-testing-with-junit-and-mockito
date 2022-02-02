@@ -11,6 +11,13 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
+        stage('Code analysis with SonarQube'){
+            steps{
+                withSonarQubeEnv('sonar'){
+                    sh 'mvn -f pom.xml clean compile sonar:sonar'
+                }
+            }
+        }
         stage('Test') {
             steps {
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
@@ -23,25 +30,9 @@ pipeline {
                 }
             }
         }
-        stage('Code analysis with SonarQube'){
-            steps{
-                coverage('maven'){
-                    withSonarQubeEnv('sonar'){
-                        sh 'mvn -f pom.xml clean compile sonar:sonar'
-                    }
-                }
-            }
-            stage('mvn构建'){
-                steps{
-                    container('maven'){
-                        sh ' mvn clean package -U -Dmaven.test.skip=true'
-                    }
-                }
-            }
-        }
-        stage('Built Docker Image') {
+        stage('Build Docker Image') {
             steps {
-                sh 'build -t my-image .'
+                sh 'mvn -DskipTests -Ddocker.tag=latest dockerfile:build'
             }
         }
     }
