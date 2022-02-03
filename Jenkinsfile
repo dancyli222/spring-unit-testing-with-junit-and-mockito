@@ -33,7 +33,6 @@ pipeline {
         stage('Build Docker Image') {
             echo 'build docker image'
             }
-        }
         stage('deploy'){
             echo 'deploy application to target machine'
         }
