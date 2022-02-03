@@ -11,19 +11,21 @@ pipeline {
                 echo "1. Prepare Stage"
             }
         }
-        stage('Build'){
-            steps {
-                sh 'mvn -B -DskipTests clean package'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+      //从代码仓库拉取代码
+        stage('Pull code'){
+            steps{
+                echo '2. fetch code from git'
+                git  credentialsId: 'xxxx', url: 'https://github.com/myaccount/myrepository.git'
             }
         }
         stage('Code analysis with SonarQube'){
             steps{
-                echo 'code analysis with SonarQube'
+                echo '3. code analysis with SonarQube'
                 }
             }
         stage('Unit Test'){
             steps {
+                echo '4. unit test'
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
                 jacoco changeBuildStatus:true,maximumLineCoverage:"20"
             }
@@ -33,22 +35,30 @@ pipeline {
                 }
             }
         }
+        //构建代码
+        stage('Build'){
+            steps {
+                echo '5. make build'
+                sh 'mvn -B -DskipTests clean package'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
         stage('Build Docker Image') {
             steps {
-                echo 'build docker image and push to docker repository'
+                echo '6. build docker image and push to docker repository'
             }
         }
 
         //部署到远程服务器
         stage('Deploy') {
             steps {
-                echo 'deploy application to target machine'
+                echo '7. pull docker image and run container'
             }                
         }
         //执行BVT测试
         stage('Build Verification Test') {
             steps {                
-                echo "Run Build Verification Test"
+                echo "8. Run Build Verification Test"
             }
         }
     }
