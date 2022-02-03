@@ -31,10 +31,14 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            echo 'build docker image'
+            steps{
+                echo 'build docker image'
             }
+        }
         stage('deploy'){
-            echo 'deploy application to target machine'
+            steps{
+                echo 'deploy application to target machine'
+            }
         }
     }
 }
