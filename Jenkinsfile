@@ -26,6 +26,9 @@ pipeline {
         stage('Code analysis with SonarQube'){
             steps{
                 echo '3. code analysis with SonarQube'
+                withSonarQubeEnv('sonar'){
+                    sh 'mvn verify sonar:sonar -Dsonar.projectKey=Myproject -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=dc255142fef90d37fe732f411cd5ae5702f2e3ff'
+                }
             }
         }
         stage('Unit Test'){
