@@ -36,7 +36,7 @@ pipeline {
             }
             post {
                 always {
-                    xunit([JUnit(deleteOutputFiles:true,failIfNotNew:true,pattern:'**target/surefire-reports/*.xml')])
+                    xunit([JUnit(deleteOutputFiles:true,failIfNotNew:true,pattern:'**target/surefire-reports/*.xml',skipNoTestFiles:false,stopProcessingIfError:true)])
                 }
             }
         }
