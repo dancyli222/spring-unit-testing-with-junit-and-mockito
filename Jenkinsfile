@@ -46,7 +46,6 @@ pipeline {
         stage('Build Verification Test') {
             steps {                
                 echo "Run Build Verification Test"
-                }
             }
         }
     }
