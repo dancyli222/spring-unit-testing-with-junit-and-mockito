@@ -6,6 +6,13 @@ pipeline {
         }
     }
     stages {
+        stage('Prepare'){
+            echo "1. Prepare Stage"
+            dockerUser = "jli7512"
+            dockerPassword = "Med68some"
+            img_name = "MyImage"
+            docker_image_name = "${docker_host}/${img_name}"
+        }
         stage('Build'){
             steps {
                 sh 'mvn -B -DskipTests clean package'
@@ -29,13 +36,13 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            steps{
-                echo 'build docker image'
+            steps {
+                echo 'build docker image and push to docker repository'
             }
         }
 
         //部署到远程服务器
-        stage('deploy') {
+        stage('Deploy') {
             steps {
                 echo 'deploy application to target machine'
             }                
