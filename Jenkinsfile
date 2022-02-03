@@ -9,10 +9,6 @@ pipeline {
         stage('Prepare'){
             steps{
                 echo "1. Prepare Stage"
-                dockerUser = "jli7512"
-                dockerPassword = "Med68some"
-                img_name = "MyImage"
-                docker_image_name = "${docker_host}/${img_name}"
             }
         }
         stage('Build'){
