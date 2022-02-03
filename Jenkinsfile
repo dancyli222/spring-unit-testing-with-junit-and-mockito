@@ -9,6 +9,7 @@ pipeline {
         stage('Build'){
             steps {
                 sh 'mvn -B -DskipTests clean package'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
         stage('Code analysis with SonarQube'){
@@ -23,7 +24,6 @@ pipeline {
             }
             post {
                 always {
-                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
                     junit 'target/surefire-reports/*.xml'
                 }
             }
@@ -33,13 +33,13 @@ pipeline {
                 echo 'build docker image'
             }
         }
-    }
 
-    node('slav001'){
         //部署到远程服务器
         stage('deploy') {
-            steps {
-                echo 'deploy application to target machine'
+            node('slav001'){
+                steps {
+                    echo 'deploy application to target machine'
+                }                
             }
         }
         //执行BVT测试
