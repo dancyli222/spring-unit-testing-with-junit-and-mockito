@@ -13,7 +13,7 @@ pipeline {
                     dockerUser = "jli7512"
                     dockerPassword = "Med68some"
                     img_name = "MyImage"
-                    docker_image_name = "${docker_host}/${img_name}"                    
+                    docker_image_name = "${dockerUser}/${img_name}"                    
                 }
             }
         }
