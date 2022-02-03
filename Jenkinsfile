@@ -36,11 +36,13 @@ pipeline {
 
         //部署到远程服务器
         stage('deploy') {
-            node('slav001'){
-                steps {
-                    echo 'deploy application to target machine'
-                }                
+            agent {
+                label 'slav001'
             }
+            
+            steps {
+                echo 'deploy application to target machine'
+            }                
         }
         //执行BVT测试
         stage('Build Verification Test') {
