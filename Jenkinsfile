@@ -37,7 +37,7 @@ pipeline {
         //部署到远程服务器
         stage('deploy') {
             agent {
-                label 'slav001'
+                label 'master'
             }
             
             steps {
@@ -46,6 +46,9 @@ pipeline {
         }
         //执行BVT测试
         stage('Build Verification Test') {
+            agent {
+                label 'master'
+            }
             steps {                
                 echo "Run Build Verification Test"
             }
