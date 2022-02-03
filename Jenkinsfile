@@ -8,7 +8,6 @@ pipeline {
     stages {
         stage('Pull code'){
             steps{
-                echo 'fetch code from git'
                 git  credentialsId: 'github', url: 'https://github.com/dancyli222/spring-unit-testing-with-junit-and-mockito.git'
             }
         }
