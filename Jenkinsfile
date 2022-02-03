@@ -28,6 +28,7 @@ pipeline {
                 echo '3. code analysis with SonarQube'
                 withSonarQubeEnv('sonar'){
                     sh 'mvn clean compile sonar:sonar'
+                }
             }
         }
         stage('Unit Test'){
