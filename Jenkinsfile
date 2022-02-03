@@ -11,6 +11,12 @@ pipeline {
                 sh 'mvn -B -DskipTests clean package'
             }
         }
+        #静态代码扫描
+        stage('Code analysis with SonarQube'){
+            withSonarQubeEnv('sonar'){
+                sh 'mvn sonar:sonar -Dsonar.projectKey=Myproject -Dsonar.host.url=http://localhost:9000 -Dsonar.login=dc255142fef90d37fe732f411cd5ae5702f2e3ff'
+            }
+        }
         stage('Unit Test'){
             steps {
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
