@@ -34,7 +34,7 @@ pipeline {
             }
         }
 
-        #部署到远程服务器
+        //部署到远程服务器
         stage('deploy') {
             steps {
                 echo 'deploy application to target machine'
