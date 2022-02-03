@@ -36,13 +36,13 @@ pipeline {
     }
 
     node('slave001'){
-    #部署到远程服务器
+    //部署到远程服务器
     stage('deploy') {
         steps {
             echo 'deploy application to target machine'
         }
     }
-    #执行BVT测试
+    //执行BVT测试
     stage('Build Verification Test') {
         steps {                
             echo "Run Build Verification Test"
