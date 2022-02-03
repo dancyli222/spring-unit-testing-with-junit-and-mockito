@@ -31,23 +31,11 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            steps {
-                script{
-                    sh 'docker build -t myImage .'
-                    sh 'docker login https://hub.docker.com/ -ujli7512 -pMed68some'
-                    def image = docker.image(myImage)
-                    image.push()
-                    image.tag(imageTage)
-                    image.push(imageTag)
-                }
+            echo 'build docker image'
             }
         }
         stage('deploy'){
-            steps{
-                script{
-                    sh 'docker run -itd --name myImage'
-                }
-            }
+            echo 'deploy application to target machine'
         }
     }
 }
