@@ -15,7 +15,6 @@ pipeline {
         stage('Pull code'){
             steps{
                 echo '2. fetch code from git'
-                git  credentialsId: 'xxxx', url: 'https://github.com/myaccount/myrepository.git'
             }
         }
         stage('Code analysis with SonarQube'){
