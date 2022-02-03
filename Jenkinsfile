@@ -33,7 +33,7 @@ pipeline {
             steps {
                 script{
                     sh 'docker build -t myImage .'
-                    sh 'docker login xxxxxx -uxx -pxx'
+                    sh 'docker login https://hub.docker.com/ -ujli7512 -pMed68some'
                     def image = docker.image(myImage)
                     image.push()
                     image.tag(imageTage)
