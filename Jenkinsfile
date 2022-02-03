@@ -35,7 +35,7 @@ pipeline {
         }
     }
 
-    node('slave001'){
+    node('slav001'){
         //部署到远程服务器
         stage('deploy') {
             steps {
