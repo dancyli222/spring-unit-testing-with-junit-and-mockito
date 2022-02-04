@@ -8,7 +8,8 @@ pipeline {
                     dockerUser = "jli7512"
                     dockerPassword = "Med68some"
                     img_name = "MyImage"
-                    docker_image_name = "${dockerUser}/${img_name}"                    
+                    docker_image_name = "${dockerUser}/${img_name}" 
+                    mvn = "/home/apache-maven-3.8.4/bin/mvn"                   
                 }
             }
         }
@@ -16,7 +17,6 @@ pipeline {
         stage('Pull code'){
             steps{
                 echo '2. fetch code from git'
-                sh '/home/apache-maven-3.8.4/bin/mvn install'
             }
         }
         stage('Code analysis with SonarQube'){
