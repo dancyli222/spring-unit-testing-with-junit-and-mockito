@@ -17,10 +17,30 @@ pipeline {
                 }
             }
         }
-      //从代码仓库拉取代码
+        //从代码仓库拉取代码
         stage('Pull code'){
             steps{
                 echo '2. fetch code from git'
+            }
+        }
+                stage('Code analysis with SonarQube'){
+            steps{
+                echo '3. code analysis with SonarQube'
+                withSonarQubeEnv('sonar'){
+                    sh 'mvn verify sonar:sonar -Dsonar.projectKey=Myproject -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=dc255142fef90d37fe732f411cd5ae5702f2e3ff'
+                }
+            }
+        }
+        stage('Unit Test'){
+            steps {
+                echo '4. unit test'
+                sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
+                jacoco changeBuildStatus:true,maximumLineCoverage:"20"
+            }
+            post {
+                always {
+                    xunit([JUnit(deleteOutputFiles:true,failIfNotNew:true,pattern:'**target/surefire-reports/*.xml')])
+                }
             }
         }
         //构建代码
