@@ -26,7 +26,7 @@ pipeline {
         stage('Code analysis with SonarQube'){
             steps{
                 echo '3. code analysis with SonarQube'
-                withSonarQubeEnv('sonar'){
+                withSonarQubeEnv('sonarqube'){
                     sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://localhost:9000 -Dsonar.login=a938a129902d454fe162f45058ac2825b151db92'
                 }
             }
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 echo '4. unit test'
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
-                jacoco changeBuildStatus:true,maximumLineCoverage:"20"
+                jacoco changeBuildStatus:true,maximumLineCoverage:"70"
             }
             post {
                 always {
