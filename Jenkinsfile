@@ -16,6 +16,7 @@ pipeline {
         stage('Pull code'){
             steps{
                 echo '2. fetch code from git'
+                bat 'C:\Users\DancyLi\apache-maven-3.8.4\bin\mvn install'
             }
         }
         stage('Code analysis with SonarQube'){
