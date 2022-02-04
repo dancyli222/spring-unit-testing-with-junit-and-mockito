@@ -11,7 +11,7 @@ pipeline {
                 echo "1. Prepare Stage"
                 script{
                     dockerUser = "jli7512"
-                    dockerPassword = "Med68some"
+                    dockerPassword = "password"
                     img_name = "MyImage"
                     docker_image_name = "${dockerUser}/${img_name}"      
                 }
@@ -23,10 +23,10 @@ pipeline {
                 echo '2. fetch code from git'
             }
         }
-                stage('Code analysis with SonarQube'){
+        stage('Code analysis with SonarQube'){
             steps{
                 echo '3. code analysis with SonarQube'
-                withSonarQubeEnv('sonar'){
+                withSonarQubeEnv('sonarqube'){
                     sh 'mvn verify sonar:sonar -Dsonar.projectKey=Myproject -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=233d3d9cfbce62c19d27e956d83bdf4044cc2237'
                 }
             }
