@@ -27,7 +27,7 @@ pipeline {
             steps{
                 echo '3. code analysis with SonarQube'
                 withSonarQubeEnv('sonar'){
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing Dsonar.login=admin -Dsonar.password=adminadmin'
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing -Dsonar.login=admin -Dsonar.password=adminadmin'
                 }
             }
         }
