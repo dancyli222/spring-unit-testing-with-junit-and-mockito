@@ -26,7 +26,7 @@ pipeline {
         stage('Code analysis with SonarQube'){
             steps{
                 echo '3. code analysis with SonarQube'
-                withSonarQubeEnv('sonar'){
+                withSonarQubeEnv('sonarqube'){
                     sh 'mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.7.0.1746:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://localhost:9000 -Dsonar.login=baa8048553bf0a1f376572b4f057a45e5973e798'
                 }
             }
