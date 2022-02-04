@@ -1,5 +1,10 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'maven:3-alpine'
+            args '-v /root/.m2:/root/.m2'
+        }
+    }
     stages {
         stage('Prepare'){
             steps{
@@ -22,7 +27,7 @@ pipeline {
             steps{
                 echo '3. code analysis with SonarQube'
                 withSonarQubeEnv('sonar'){
-                    sh '/home/apache-maven-3.8.4/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin –Dsonar.password=adminadmin'
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://localhost:9000 -Dsonar.login=admin –Dsonar.password=adminadmin'
                 }
             }
         }
