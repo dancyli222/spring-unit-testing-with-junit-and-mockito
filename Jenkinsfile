@@ -23,18 +23,6 @@ pipeline {
                 echo '2. fetch code from git'
             }
         }
-        stage('Unit Test'){
-            steps {
-                echo '4. unit test'
-                sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
-                jacoco changeBuildStatus:true,maximumLineCoverage:"70"
-            }
-            post {
-                always {
-                    xunit([JUnit(deleteOutputFiles:true,failIfNotNew:true,pattern:'**target/surefire-reports/*.xml',skipNoTestFiles:false,stopProcessingIfError:true)])
-                }
-            }
-        }
         //构建代码
         stage('Build'){
             steps {
