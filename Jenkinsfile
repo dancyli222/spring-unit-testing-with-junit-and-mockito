@@ -16,7 +16,7 @@ pipeline {
         stage('Pull code'){
             steps{
                 echo '2. fetch code from git'
-                sh '/home/maven/bin/mvn install'
+                sh '/user/local/maven/bin/mvn install'
             }
         }
         stage('Code analysis with SonarQube'){
