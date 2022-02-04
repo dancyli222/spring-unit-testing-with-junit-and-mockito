@@ -1,4 +1,3 @@
-def mvn = /home/apache-maven-3.8.4/bin/mvn
 pipeline {
     agent any
     stages {
@@ -9,8 +8,7 @@ pipeline {
                     dockerUser = "jli7512"
                     dockerPassword = "Med68some"
                     img_name = "MyImage"
-                    docker_image_name = "${dockerUser}/${img_name}" 
-                    mvn = "/home/apache-maven-3.8.4/bin/mvn"                   
+                    docker_image_name = "${dockerUser}/${img_name}"      
                 }
             }
         }
@@ -24,7 +22,7 @@ pipeline {
             steps{
                 echo '3. code analysis with SonarQube'
                 withSonarQubeEnv('sonar'){
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing'
+                    sh '/home/apache-maven-3.8.4/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing'
                 }
             }
         }
