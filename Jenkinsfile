@@ -1,3 +1,4 @@
+def mvn = /home/apache-maven-3.8.4/bin/mvn
 pipeline {
     agent any
     stages {
