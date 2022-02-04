@@ -1,0 +1,17 @@
+com\in28minutes\unittesting\unittesting\business\SomeBusinessStubTest.class
+com\in28minutes\unittesting\unittesting\UnitTestingApplicationTests.class
+com\in28minutes\unittesting\unittesting\business\ItemBusinessServiceTest.class
+com\in28minutes\unittesting\unittesting\spike\HamcrestMatchersTest.class
+com\in28minutes\unittesting\unittesting\business\SomeBusinessMockTest.class
+com\in28minutes\unittesting\unittesting\business\SomeDataServiceEmptyStub.class
+com\in28minutes\unittesting\unittesting\business\SomeDataServiceStub.class
+com\in28minutes\unittesting\unittesting\data\ItemRepositoryTest.class
+com\in28minutes\unittesting\unittesting\business\SomeDataServiceOneElementStub.class
+com\in28minutes\unittesting\unittesting\controller\ItemControllerTest.class
+com\in28minutes\unittesting\unittesting\controller\ItemControllerIT.class
+com\in28minutes\unittesting\unittesting\spike\JsonAssertTest.class
+com\in28minutes\unittesting\unittesting\business\ListMockTest.class
+com\in28minutes\unittesting\unittesting\business\SomeBusinessTest.class
+com\in28minutes\unittesting\unittesting\controller\HelloWorldControllerTest.class
+com\in28minutes\unittesting\unittesting\spike\JsonPathTest.class
+com\in28minutes\unittesting\unittesting\spike\AssertJTest.class

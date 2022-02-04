@@ -1,0 +1,8 @@
+com\in28minutes\unittesting\unittesting\controller\ItemController.class
+com\in28minutes\unittesting\unittesting\business\SomeBusinessImpl.class
+com\in28minutes\unittesting\unittesting\data\ItemRepository.class
+com\in28minutes\unittesting\unittesting\UnitTestingApplication.class
+com\in28minutes\unittesting\unittesting\model\Item.class
+com\in28minutes\unittesting\unittesting\business\ItemBusinessService.class
+com\in28minutes\unittesting\unittesting\controller\HelloWorldController.class
+com\in28minutes\unittesting\unittesting\data\SomeDataService.class
