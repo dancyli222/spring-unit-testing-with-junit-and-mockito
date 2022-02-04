@@ -27,7 +27,7 @@ pipeline {
             steps{
                 echo '3. code analysis with SonarQube'
                 withSonarQubeEnv('sonar'){
-                    sh '/home/apache-maven-3.8.4/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing'
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing'
                 }
             }
         }
