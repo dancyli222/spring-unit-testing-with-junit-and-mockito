@@ -22,7 +22,7 @@ pipeline {
             steps{
                 echo '3. code analysis with SonarQube'
                 withSonarQubeEnv('sonarqube'){
-                    sh '/usr/local/maven/bin/mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=233d3d9cfbce62c19d27e956d83bdf4044cc2237'
+                    sh '/usr/local/maven/bin/mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://127.0.0.1:9000 -Dsonar.login=233d3d9cfbce62c19d27e956d83bdf4044cc2237'
                 }
             }
         }

@@ -1,6 +1,6 @@
 projectKey=unit-testing
-serverUrl=http://localhost:9000
+serverUrl=http://127.0.0.1:9000
 serverVersion=9.3.0.51899
-dashboardUrl=http://localhost:9000/dashboard?id=unit-testing
-ceTaskId=AX7DwOLX3TQVKg4TIFlQ
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AX7DwOLX3TQVKg4TIFlQ
+dashboardUrl=http://127.0.0.1:9000/dashboard?id=unit-testing
+ceTaskId=AX7FQjC_ke1aB4_BoXTn
+ceTaskUrl=http://127.0.0.1:9000/api/ce/task?id=AX7FQjC_ke1aB4_BoXTn
