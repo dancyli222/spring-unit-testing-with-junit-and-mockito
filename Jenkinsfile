@@ -27,7 +27,7 @@ pipeline {
             steps{
                 echo '3. code analysis with SonarQube'
                 withSonarQubeEnv('sonarqube'){
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://localhost:9000 -Dsonar.login=254d449b1b2dca7b6b1b1a9c440a6ca5370b17d7'
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing -Dsonar.host.url=http://localhost:9000 -Dsonar.login=baa8048553bf0a1f376572b4f057a45e5973e798'
                 }
             }
         }
