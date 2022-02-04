@@ -45,7 +45,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                echo '6. build docker image and push to docker repository'
+                script{
+                    sh 'docker build -t myImage .'
+                }
             }
         }
 
