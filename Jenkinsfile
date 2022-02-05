@@ -23,14 +23,7 @@ pipeline {
                 echo '2. fetch code from git'
             }
         }
-        stage('Code analysis with SonarQube'){
-            steps{
-                echo '3. code analysis with SonarQube'
-                withSonarQubeEnv('sonarqube'){
-                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=unit-testing'
-                }
-            }
-        }
+
         stage('Unit Test'){
             steps {
                 echo '4. unit test'
