@@ -8,6 +8,9 @@ pipeline {
                     args '-v /root/.m2:/root/.m2'
                 }
             }
+            steps{
+                echo "0. install maven"
+            }
         }
         stage('Prepare'){
             steps{
