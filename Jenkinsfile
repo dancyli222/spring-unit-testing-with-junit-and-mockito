@@ -1,10 +1,10 @@
 pipeline {
     agent none
     enviroment{
-        dockerUser = "jli7512"
-        dockerPassword = "Med68some"
-        img_name = "MyImage"
-        docker_image_name = "${dockerUser}/${img_name}" 
+        dockerUser = 'jli7512'
+        dockerPassword = 'Med68some'
+        img_name = 'myimage'
+        docker_image_name = '${dockerUser}/${img_name}'
     }
     stages {
         //从代码仓库拉取代码
