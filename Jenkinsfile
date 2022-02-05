@@ -56,7 +56,7 @@ pipeline {
         stage('Build Docker Image') {
             agent any
             steps {
-                sh '/usr/bin/docker build -t myImage .'
+                sh 'docker build -t myimage .'
             }
         }
         //部署到远程服务器
