@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo '4. unit test'
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
-                jacoco changeBuildStatus:true,maximumLineCoverage:"20"
+                jacoco changeBuildStatus:true,maximumLineCoverage:"70"
             }
             post {
                 always {
@@ -47,7 +47,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script{
-                    sh 'docker build -t myImage .'
+                    sh '/usr/local/bin/docker build -t myImage .'
                 }
             }
         }
