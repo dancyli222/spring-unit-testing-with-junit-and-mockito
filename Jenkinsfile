@@ -1,9 +1,10 @@
 pipeline {
     agent any
     parameters{
+        string(name: 'docker_host', defaultValue: 'hub.docker.com')
         string(name: 'dockerUser', defaultValue:'jli7512')
         string(name: 'dockerPassword', defaultValue: 'Med68some')
-        string(name: 'docker_image_name', defaultValue: '${dockerUser}/myimage')
+        string(name: 'docker_image_name', defaultValue: 'myimage')
     }
     stages {
         //从代码仓库拉取代码
@@ -50,7 +51,7 @@ pipeline {
             agent any
             steps {
                 script{
-                    sh 'docker build -t ${img_name} .'
+                    sh 'docker build -t ${docker_image_name} .'
                     sh 'docker login ${docker_host} -u ${dockerUser} -p ${dockerPassword}'
                     sh 'docker push ${docker_img_name}'
                 }
