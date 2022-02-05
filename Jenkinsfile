@@ -1,12 +1,8 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent none
     stages {
         stage('Prepare'){
+            agent any
             steps{
                 echo "1. Prepare Stage"
                 script{
@@ -19,12 +15,19 @@ pipeline {
         }
         //从代码仓库拉取代码
         stage('Pull code'){
+            agent any
             steps{
                 echo '2. fetch code from git'
             }
         }
 
         stage('Unit Test'){
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
             steps {
                 echo '4. unit test'
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
@@ -38,13 +41,6 @@ pipeline {
         }
         //构建代码
         stage('Build'){
-            steps {
-                echo '5. make build'
-                sh 'mvn -B -DskipTests clean package'
-                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-            }
-        }
-        stage('Build Docker Image') {
             agent {
                 docker {
                     image 'maven:3-alpine'
@@ -52,17 +48,27 @@ pipeline {
                 }
             }
             steps {
+                echo '5. make build'
+                sh 'mvn -B -DskipTests clean package'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+        stage('Build Docker Image') {
+            agent any
+            steps {
                 sh '/usr/bin/docker build -t myImage .'
             }
         }
         //部署到远程服务器
         stage('Deploy') {
+            agent any
             steps {
                 echo '7. pull docker image and run container'
             }                
         }
         //执行BVT测试
         stage('Build Verification Test') {
+            agent any
             steps {                
                 echo "8. Run Build Verification Test"
             }
