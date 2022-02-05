@@ -7,7 +7,7 @@ pipeline {
                 echo "1. Prepare Stage"
                 script{
                     dockerUser = "jli7512"
-                    dockerPassword = "password"
+                    dockerPassword = "Med68some"
                     img_name = "MyImage"
                     docker_image_name = "${dockerUser}/${img_name}"      
                 }
@@ -56,7 +56,11 @@ pipeline {
         stage('Build Docker Image') {
             agent any
             steps {
-                sh 'docker build -t myimage .'
+                script{
+                    sh 'docker build -t ${img_name} .'
+                    sh 'docker login ${docker_host} -u ${dockerUser} -p ${dockerPassword}'
+                    sh 'docker push ${docker_img_name}'
+                }
             }
         }
         //部署到远程服务器
