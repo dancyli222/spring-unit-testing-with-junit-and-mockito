@@ -46,12 +46,9 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                script{
                     sh '/usr/bin/docker build -t myImage .'
                 }
             }
-        }
-
         //部署到远程服务器
         stage('Deploy') {
             steps {
