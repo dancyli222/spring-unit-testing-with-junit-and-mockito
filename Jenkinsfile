@@ -1,15 +1,14 @@
 pipeline {
     agent any
-    enviroment{
-        dockerUser = 'jli7512'
-        dockerPassword = 'Med68some'
-        img_name = 'myimage'
-        docker_image_name = '${dockerUser}/${img_name}'
+    parameters{
+        string(name: 'dockerUser', defaultValue:'jli7512')
+        string(name: 'dockerPassword', defaultValue: 'Med68some')
+        string(name: 'docker_image_name', defaultValue: '${dockerUser}/myimage')
     }
     stages {
         //从代码仓库拉取代码
         stage('Pull code'){
-            agent any
+            agent {label 'master'}
             steps{
                 echo '1. fetch code from git'
             }
@@ -48,7 +47,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent any
+            agent {label 'master'}
             steps {
                 script{
                     sh 'docker build -t ${img_name} .'
