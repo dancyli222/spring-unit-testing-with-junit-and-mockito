@@ -1,23 +1,17 @@
 pipeline {
     agent none
+    enviroment{
+        dockerUser = "jli7512"
+        dockerPassword = "Med68some"
+        img_name = "MyImage"
+        docker_image_name = "${dockerUser}/${img_name}" 
+    }
     stages {
-        stage('Prepare'){
-            agent any
-            steps{
-                echo "1. Prepare Stage"
-                script{
-                    dockerUser = "jli7512"
-                    dockerPassword = "Med68some"
-                    img_name = "MyImage"
-                    docker_image_name = "${dockerUser}/${img_name}"      
-                }
-            }
-        }
         //从代码仓库拉取代码
         stage('Pull code'){
             agent any
             steps{
-                echo '2. fetch code from git'
+                echo '1. fetch code from git'
             }
         }
 
@@ -29,7 +23,7 @@ pipeline {
                 }
             }
             steps {
-                echo '4. unit test'
+                echo '2. unit test'
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
                 jacoco changeBuildStatus:true,maximumLineCoverage:"70"
             }
@@ -48,7 +42,7 @@ pipeline {
                 }
             }
             steps {
-                echo '5. make build'
+                echo '4. make build'
                 sh 'mvn -B -DskipTests clean package'
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
