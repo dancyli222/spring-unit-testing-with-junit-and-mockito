@@ -47,7 +47,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script{
-                    sh '/usr/local/bin/docker build -t myImage .'
+                    sh '/usr/bin/docker build -t myImage .'
                 }
             }
         }
