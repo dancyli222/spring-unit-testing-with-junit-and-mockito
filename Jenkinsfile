@@ -1,5 +1,5 @@
 pipeline {
-    agent none
+    agent any
     enviroment{
         dockerUser = 'jli7512'
         dockerPassword = 'Med68some'
