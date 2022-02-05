@@ -53,7 +53,7 @@ pipeline {
                 script{
                     sh 'docker build -t ${docker_image_name} .'
                     sh 'docker login ${docker_host} -u ${dockerUser} -p ${dockerPassword}'
-                    sh 'docker push ${docker_img_name}'
+                    sh 'docker push ${docker_image_name}'
                 }
             }
         }
