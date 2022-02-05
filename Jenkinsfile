@@ -1,11 +1,14 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3-alpine'
-            args '-v /root/.m2:/root/.m2'
-        }
-    }
+    agent none
     stages {
+        stage('install maven'){
+            agent {
+                docker {
+                    image 'maven:3-alpine'
+                    args '-v /root/.m2:/root/.m2'
+                }
+            }
+        }
         stage('Prepare'){
             steps{
                 echo "1. Prepare Stage"
@@ -45,6 +48,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
+            agent any
             steps {
                     sh '/usr/bin/docker build -t myImage .'
                 }
