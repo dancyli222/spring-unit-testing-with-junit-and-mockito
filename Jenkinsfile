@@ -8,7 +8,7 @@ pipeline {
     stages {
         //从代码仓库拉取代码
         stage('Pull code'){
-            agent {label 'master'}
+            agent any
             steps{
                 echo '1. fetch code from git'
             }
@@ -47,7 +47,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent {label 'master'}
+            agent any
             steps {
                 script{
                     sh 'docker build -t ${img_name} .'
