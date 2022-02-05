@@ -5,6 +5,7 @@ pipeline {
             args '-v /root/.m2:/root/.m2'
         }
     }
+    stages {
         stage('Prepare'){
             steps{
                 echo "1. Prepare Stage"
@@ -51,9 +52,9 @@ pipeline {
                 }
             }
             steps {
-                    sh '/usr/bin/docker build -t myImage .'
-                }
+                sh '/usr/bin/docker build -t myImage .'
             }
+        }
         //部署到远程服务器
         stage('Deploy') {
             steps {
