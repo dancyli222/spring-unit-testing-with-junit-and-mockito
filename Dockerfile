@@ -1,7 +1,7 @@
 #指定以openjdk:8-jre-alpine为基础镜像，来构建此镜像
 FROM openjdk:8-jdk-alpine
 # 默认jar包的名字
-ARG jar_name = {jar_name:unit-testing-0.0.1-SNAPSHOT.jar}
+ARG jar_name = {jar_name:-unit-testing-0.0.1-SNAPSHOT.jar}
 # RUN用于容器内部执行命令
 RUN mkdir -p /usr/local/project
 # 指定容器的目录，容器启动时执行的命令会在该目录下执行
