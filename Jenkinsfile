@@ -46,8 +46,8 @@ pipeline {
             steps {
                 script{
                     sh 'docker build -t ${docker_image_name} .'
-                    sh 'docker login ${docker_host} -u ${dockerUser} -p ${dockerPassword}'
-                    sh 'docker push ${docker_image_name}:latest'
+                    sh 'docker login -u ${your_docker_user} -p ${your_docker_password}'
+                    sh 'docker push ${your_docker_user}/${docker_image_name}:latest'
                 }
             }
         }
@@ -67,9 +67,12 @@ pipeline {
         }
     }
     environment {
-        docker_image_name = 'utexample'
-        dockerUser = 'jli7512@163.com'
-        dockerPassword = 'Med68some'
-        docker_host = "hub.docker.com"
+        GIT_PROJECT_ADDR='https://github.com/dancyli222/spring-unit-testing-with-junit-and-mockito.git'  //项目的git地址
+        PROJECT_NAME='${JOB_NAME}'  //项目名称
+        JAR_NAME='unit-testing-0.0.1-SNAPSHOT.jar' //项目打包成的jar文件名
+        docker_image_name = 'unit-testing'  //docker镜像名称，一般和项目名相同
+        your_docker_user = 'jli7512'  
+        your_docker_password = 'Med68some'
+        your_docker_host = "hub.docker.com"
   }
 }
