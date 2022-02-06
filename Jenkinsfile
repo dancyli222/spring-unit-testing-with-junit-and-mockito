@@ -60,7 +60,7 @@ pipeline {
                 sh '''
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
                 docker pull ${IMAGE_NAME：${VERSION_ID}
-                docker run --name "${PROJECT_NAME}_${VERSION_ID}" -p 9001:50051 -d ${IMAGE_ADDR}:${VERSION_ID}
+                docker run --name "${PROJECT_NAME}_${VERSION_ID}" -p 9001:50051 -d ${IMAGE_ADDR}:latest
                 '''
             }                
         }
@@ -79,6 +79,5 @@ pipeline {
         DOCKER_ID = 'jli7512'
         IMAGE_ADDR = "hub.docker.com/${DOCKER_ID}/${IMAGE_NAME}"
         DOCKER_PASSWORD = 'Med68some'
-        VERSION_ID="${BUILD_ID}"
   }
 }
