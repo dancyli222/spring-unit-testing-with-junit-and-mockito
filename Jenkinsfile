@@ -48,7 +48,7 @@ pipeline {
                 docker build -f Dockerfile -t ${IMAGE_NAME} .
                 docker tag ${DOCKER_ID} ${IMAGE_ADDR}:${VERSION_ID}
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
-                docker push ${IMAGE_NAME：${VERSION_ID}
+                docker push ${IMAGE_NAME}：${VERSION_ID}
                 '''
             }
         }
