@@ -46,9 +46,9 @@ pipeline {
             steps {
                 sh '''
                 docker build -f Dockerfile -t ${IMAGE_NAME} .
-                docker tag ${IMAGE_NAME} ${IMAGE_ADDR}:latest
+                docker tag ${IMAGE_NAME} ${DOCKER_ID}/${IMAGE_NAME}:latest
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
-                docker push ${IMAGE_NAME}：${VERSION_ID}
+                docker push ${DOCKER_ID}/${IMAGE_NAME}:latest
                 '''
             }
         }
@@ -77,7 +77,6 @@ pipeline {
         PROJECT_NAME='${JOB_NAME}'  //项目名称
         IMAGE_NAME = 'unit-testing'  //docker镜像名称，一般和项目名相同
         DOCKER_ID = 'jli7512'
-        IMAGE_ADDR = "hub.docker.com/${DOCKER_ID}/${IMAGE_NAME}"
         DOCKER_PASSWORD = 'Med68some'
   }
 }
