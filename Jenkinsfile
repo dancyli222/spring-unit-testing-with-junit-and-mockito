@@ -45,9 +45,12 @@ pipeline {
             agent any
             steps {
                 script{
-                    sh 'docker build -t ${docker_image_name} .'
-                    sh 'docker login -u ${your_docker_user} -p ${your_docker_password}'
-                    sh 'docker push ${your_docker_user}/${docker_image_name}:latest'
+                    sh '''
+                    docker build -f Dockerfile --build-arg jar_name=${JAR_NAME} -t ${IMAGE_NAME：${VERSION_ID} .
+                    docker tag ${DOCKER_ID} ${IMAGE_ADDR}:${VERSION_ID}
+                    docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
+                    docker push ${IMAGE_NAME：${VERSION_ID}
+                    '''
                 }
             }
         }
@@ -56,6 +59,11 @@ pipeline {
             agent any
             steps {
                 echo '7. pull docker image and run container'
+                sh '''
+                docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
+                docker pull ${IMAGE_NAME：${VERSION_ID}
+                docker run --name "${PROJECT_NAME}_${VERSION_ID}" -p 9001:50051 -d ${IMAGE_ADDR}:${VERSION_ID}
+                '''
             }                
         }
         //执行BVT测试
@@ -70,9 +78,9 @@ pipeline {
         GIT_PROJECT_ADDR='https://github.com/dancyli222/spring-unit-testing-with-junit-and-mockito.git'  //项目的git地址
         PROJECT_NAME='${JOB_NAME}'  //项目名称
         JAR_NAME='unit-testing-0.0.1-SNAPSHOT.jar' //项目打包成的jar文件名
-        docker_image_name = 'unit-testing'  //docker镜像名称，一般和项目名相同
-        your_docker_user = 'jli7512'  
-        your_docker_password = 'Med68some'
-        your_docker_host = "hub.docker.com"
+        IMAGE_NAME = 'unit-testing'  //docker镜像名称，一般和项目名相同
+        DOCKER_ID = 'jli7512'
+        IMAGE_ADDR = "hub.docker.com/${DOCKER_ID}/${IMAGE_NAME}"
+        DOCKER_PASSWORD = 'Med68some'
   }
 }
