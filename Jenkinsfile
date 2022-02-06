@@ -46,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                 docker build -f Dockerfile -t ${IMAGE_NAME} .
-                docker tag ${IMAGE_NAME} ${IMAGE_ADDR}:${VERSION_ID}
+                docker tag ${IMAGE_NAME} ${IMAGE_ADDR}:latest
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
                 docker push ${IMAGE_NAME}：${VERSION_ID}
                 '''
@@ -60,7 +60,7 @@ pipeline {
                 sh '''
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
                 docker pull ${IMAGE_NAME：${VERSION_ID}
-                docker run --name "${PROJECT_NAME}_${VERSION_ID}" -p 9001:50051 -d ${IMAGE_ADDR}:latest
+                docker run --name ${PROJECT_NAME} -p 9001:50051 -d ${IMAGE_ADDR}:latest
                 '''
             }                
         }
