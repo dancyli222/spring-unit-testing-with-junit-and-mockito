@@ -23,7 +23,7 @@ pipeline {
             }
             post {
                 always {
-                    xunit([JUnit(deleteOutputFiles:true,failIfNotNew:true,pattern:'**target/surefire-reports/*.xml')])
+                    junit '**target/surefire-reports/*.xml'
                 }
             }
         }
@@ -67,8 +67,9 @@ pipeline {
         }
     }
     environment {
-    docker_image_name = 'utexample'
-    dockerUser = 'jli7512@163.com'
-    dockerPassword = 'password'
+        docker_image_name = 'utexample'
+        dockerUser = 'jli7512@163.com'
+        dockerPassword = 'Med68some'
+        docker_host = "hub.docker.com"
   }
 }
