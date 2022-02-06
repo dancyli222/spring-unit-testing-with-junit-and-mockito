@@ -12,12 +12,12 @@ pipeline {
         stage('Unit Test'){
             agent {
                 docker {
-                    image 'maven:3-alpine'
+                    image 'maven:3-alpine'  //在流水线中启动maven
                     args '-v /root/.m2:/root/.m2'
                 }
             }
             steps {
-                echo '2. unit test'
+                echo '2. run unit test'
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
                 jacoco changeBuildStatus:true,maximumLineCoverage:"70"
             }
@@ -42,8 +42,9 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent any
+            agent {dockerfile true}
             steps {
+                echo '5. Build Docker Image and then push to docker server'
                 sh '''
                 docker build -f Dockerfile -t ${IMAGE_NAME} .
                 docker tag ${IMAGE_NAME} ${DOCKER_ID}/${IMAGE_NAME}:latest
@@ -56,10 +57,10 @@ pipeline {
         stage('Deploy') {
             agent any
             steps {
-                echo '7. pull docker image and run container'
+                echo '6. pull docker image and run container in test environment'
                 sh '''
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
-                docker pull ${IMAGE_NAME：${VERSION_ID}
+                docker pull ${IMAGE_NAME}：latest
                 docker run --name ${PROJECT_NAME} -p 9001:50051 -d ${IMAGE_ADDR}:latest
                 '''
             }                
@@ -68,7 +69,7 @@ pipeline {
         stage('Build Verification Test') {
             agent any
             steps {                
-                echo "8. Run Build Verification Test"
+                echo "7. Run Build Verification Test in test environment"
             }
         }
     }
