@@ -45,7 +45,7 @@ pipeline {
             agent any
             steps {
                 sh '''
-                docker build -f Dockerfile --build-arg jar_name=${JAR_NAME} -t ${IMAGE_NAME：${VERSION_ID} .
+                docker build -f Dockerfile --build-arg jar_name=${JAR_NAME} -t ${IMAGE_NAME}：${VERSION_ID} .
                 docker tag ${DOCKER_ID} ${IMAGE_ADDR}:${VERSION_ID}
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
                 docker push ${IMAGE_NAME：${VERSION_ID}
