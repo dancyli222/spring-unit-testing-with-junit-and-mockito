@@ -42,7 +42,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent {dockerfile true}
+            agent any
             steps {
                 echo '5. Build Docker Image and then push to docker server'
                 sh '''
