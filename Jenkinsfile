@@ -6,6 +6,7 @@ pipeline {
             agent any
             steps{
                 echo '1. fetch code from git'
+                checkout SCM
             }
         }
 
@@ -42,7 +43,11 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent any
+            agent {
+                dockerfile{
+                    filename 'Dockerfile'
+                }
+            }
             steps {
                 echo '5. Build Docker Image and then push to docker server'
                 sh '''
