@@ -44,14 +44,12 @@ pipeline {
         stage('Build Docker Image') {
             agent any
             steps {
-                script{
-                    sh '''
-                    docker build -f Dockerfile --build-arg jar_name=${JAR_NAME} -t ${IMAGE_NAME：${VERSION_ID} .
-                    docker tag ${DOCKER_ID} ${IMAGE_ADDR}:${VERSION_ID}
-                    docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
-                    docker push ${IMAGE_NAME：${VERSION_ID}
-                    '''
-                }
+                sh '''
+                docker build -f Dockerfile --build-arg jar_name=${JAR_NAME} -t ${IMAGE_NAME：${VERSION_ID} .
+                docker tag ${DOCKER_ID} ${IMAGE_ADDR}:${VERSION_ID}
+                docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
+                docker push ${IMAGE_NAME：${VERSION_ID}
+                '''
             }
         }
         //部署到远程服务器
