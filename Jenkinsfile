@@ -80,5 +80,6 @@ pipeline {
         DOCKER_ID = 'jli7512'
         IMAGE_ADDR = "hub.docker.com/${DOCKER_ID}/${IMAGE_NAME}"
         DOCKER_PASSWORD = 'Med68some'
+        VERSION_ID="${BUILD_ID}"
   }
 }
