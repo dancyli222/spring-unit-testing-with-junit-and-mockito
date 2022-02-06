@@ -61,7 +61,7 @@ pipeline {
                 sh '''
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
                 docker pull ${DOCKER_ID}/${IMAGE_NAME}:latest
-                docker run --name ${PROJECT_NAME} -p 9001:50051 -d ${DOCKER_ID}/${IMAGE_NAME}:latest
+                docker run --name ${IMAGE_NAME} -p 9001:50051 -d ${DOCKER_ID}/${IMAGE_NAME}:latest
                 '''
             }                
         }
