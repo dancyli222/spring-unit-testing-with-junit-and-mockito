@@ -60,8 +60,8 @@ pipeline {
                 echo '6. pull docker image and run container in test environment'
                 sh '''
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
-                docker pull ${IMAGE_NAME}：latest
-                docker run --name ${PROJECT_NAME} -p 9001:50051 -d ${IMAGE_ADDR}:latest
+                docker pull ${DOCKER_ID}/${IMAGE_NAME}:latest
+                docker run --name ${PROJECT_NAME} -p 9001:50051 -d ${DOCKER_ID}/${IMAGE_NAME}:latest
                 '''
             }                
         }
