@@ -1,6 +1,14 @@
 pipeline {
     agent any
     stages {
+        //从代码仓库拉取代码和用于流水线任务的jenkinsfile和Dockerfile
+        stage('Pull code'){
+            agent any
+            steps{
+                echo '1. fetch code from git'
+                checkout SCM
+            }
+        }
         stage('Unit Test'){
             agent {
                 docker {
