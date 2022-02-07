@@ -9,7 +9,6 @@ COPY target/unit-testing-0.0.1-SNAPSHOT.jar ./
 # 暴露容器端口为50051 Docker镜像告知Docker宿主机应用监听了50051端口
 EXPOSE 50051
 #容器启动时执行的命令
-CMD java -jar -Dserver.port=50051 ${JAR_FILE}
 ENTRYPOINT ["java","-jar","-Dserver.port=50051","unit-testing-0.0.1-SNAPSHOT.jar"]
 
 
