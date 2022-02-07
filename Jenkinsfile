@@ -71,7 +71,6 @@ pipeline {
             agent {
                 docker{
                     image 'postman/newman'  //在流水线中启动newman
-                    args '-v /root/.m2:/root/.m2'
                 }
             }
             steps {                
