@@ -1,11 +1,5 @@
 pipeline {
-    environment {
-        GIT_PROJECT_ADDR='https://github.com/dancyli222/spring-unit-testing-with-junit-and-mockito.git'  //项目的git地址
-        PROJECT_NAME='${JOB_NAME}'  //项目名称
-        IMAGE_NAME = 'unit-testing'  //docker镜像名称，一般和项目名相同
-        DOCKER_ID = 'jli7512'
-        DOCKER_PASSWORD = 'Med68some'
-    }
+    
     agent any
     stages {
         //从代码仓库拉取代码和用于流水线任务的jenkinsfile和Dockerfile
