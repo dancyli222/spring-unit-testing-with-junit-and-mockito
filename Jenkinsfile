@@ -38,8 +38,7 @@ pipeline {
             steps {
                 echo '5. Build Docker Image and then push to docker server'
                 sh '''
-                docker build -f Dockerfile -t ${IMAGE_NAME} .
-                docker tag ${IMAGE_NAME} ${DOCKER_ID}/${IMAGE_NAME}:latest
+                docker build -f Dockerfile -t ${DOCKER_ID}/${IMAGE_NAME}:latest .
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
                 docker push ${DOCKER_ID}/${IMAGE_NAME}:latest
                 '''
