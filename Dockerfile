@@ -6,9 +6,9 @@ RUN mkdir -p /usr/local/project
 WORKDIR /usr/local/project
 # 将项目jar包复制到/usr/local/project目录下
 COPY target/unit-testing-0.0.1-SNAPSHOT.jar ./
-# 暴露容器端口为50051 Docker镜像告知Docker宿主机应用监听了50051端口
-EXPOSE 50051
+# 暴露容器端口为9001 Docker镜像告知Docker宿主机应用监听了9001端口
+EXPOSE 9001
 #容器启动时执行的命令
-ENTRYPOINT ["java","-jar","-Dserver.port=50051","unit-testing-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java","-jar","-Dserver.port=9001","unit-testing-0.0.1-SNAPSHOT.jar"]
 
 
