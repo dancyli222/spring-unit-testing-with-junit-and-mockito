@@ -77,8 +77,10 @@ pipeline {
         //在测试服务器节点执行BVT测试
         stage('Build Verification Test') {
             agent {
-                image 'postman/newman'  //在流水线中启动newman
-                args '-v /root/.m2:/root/.m2'
+                docker{
+                    image 'postman/newman'  //在流水线中启动newman
+                    args '-v /root/.m2:/root/.m2'
+                }
             }
             steps {                
                 echo "7. Run Build Verification Test in test environment"
@@ -93,5 +95,5 @@ pipeline {
         DOCKER_ID = 'jli7512'
         DOCKER_PASSWORD = 'Med68some'
         NEWMAN_TEST_SCRIPT = 'Sample-Collection.postman_collection.json'
-  }
+    }
 }
