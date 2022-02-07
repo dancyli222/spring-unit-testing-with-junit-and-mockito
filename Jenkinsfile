@@ -46,11 +46,7 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-            agent {
-                dockerfile{
-                    filename 'Dockerfile'
-                }
-            }
+            agent any
             steps {
                 echo '5. Build Docker Image and then push to docker server'
                 sh '''
