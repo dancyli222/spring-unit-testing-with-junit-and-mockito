@@ -1,5 +1,4 @@
 pipeline {
-    
     agent any
     stages {
         //从代码仓库拉取代码和用于流水线任务的jenkinsfile和Dockerfile
@@ -10,6 +9,7 @@ pipeline {
                 checkout scm
             }
         }
+        //执行单元测试及代码覆盖率分析，单元覆盖率要求为70%，如果低于70%则构建失败
         stage('Unit Test'){
             agent {
                 docker {
@@ -28,6 +28,14 @@ pipeline {
                 }
             }
         }
+        stage('Code analysis with SonarQube'){
+            steps{
+                echo '3. code analysis with SonarQube'
+                withSonarQubeEnv('sonar'){
+                    sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Myproject -Dsonar.host.url=http://localhost:9000 -Dsonar.login=dc255142fef90d37fe732f411cd5ae5702f2e3ff'
+                }
+            }
+        }
         //构建代码
         stage('Build'){
             agent {
@@ -42,6 +50,7 @@ pipeline {
                 archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
             }
         }
+        //创建docker镜像并推送到Docker服务器
         stage('Build Docker Image') {
             agent any
             steps {
@@ -53,7 +62,7 @@ pipeline {
                 '''
             }
         }
-        //部署到远程服务器
+        //在测试服务器的节点拉取镜像，创建并启动容器
         stage('Deploy') {
             agent any
             steps {
@@ -65,11 +74,15 @@ pipeline {
                 '''
             }                
         }
-        //执行BVT测试
+        //在测试服务器节点执行BVT测试
         stage('Build Verification Test') {
-            agent any
+            agent {
+                image 'postman/newman'  //在流水线中启动newman
+                args '-v /root/.m2:/root/.m2'
+            }
             steps {                
                 echo "7. Run Build Verification Test in test environment"
+                sh 'newman run your-collection.json'
             }
         }
     }
