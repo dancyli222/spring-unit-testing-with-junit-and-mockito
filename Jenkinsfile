@@ -1,6 +1,18 @@
 pipeline {
     agent any
     stages {
+<<<<<<< HEAD
+=======
+        //从代码仓库拉取代码
+        stage('Pull code'){
+            agent any
+            steps{
+                echo '1. fetch code from git'
+                checkout SCM
+            }
+        }
+
+>>>>>>> 2d3f5dab7df8d3a6491b9d6e2985a5605467d64c
         stage('Unit Test'){
             agent {
                 docker {
