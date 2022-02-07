@@ -6,7 +6,7 @@ pipeline {
             agent any
             steps{
                 echo '1. fetch code from git'
-                checkout SCM
+                checkout scm
             }
         }
         stage('Unit Test'){
