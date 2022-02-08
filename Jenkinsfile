@@ -75,7 +75,8 @@ pipeline {
             }
             steps {                
                 echo "7. Run Build Verification Test in test environment"
-                sh 'newman run pipeline/${NEWMAN_TEST_SCRIPT}'
+                System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL","86400")
+                sh 'newman run pipeline/${TEST_SCRIPT}'
             }
         }
     }
@@ -85,6 +86,6 @@ pipeline {
         IMAGE_NAME = 'unit-testing'  //docker镜像名称，一般和项目名相同
         DOCKER_ID = 'jli7512'
         DOCKER_PASSWORD = 'Med68some'
-        NEWMAN_TEST_SCRIPT = 'Sample-Collection.postman_collection.json'
+        TEST_SCRIPT = 'Sample-Collection.postman_collection.json'
     }
 }
