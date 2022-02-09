@@ -68,14 +68,9 @@ pipeline {
         }
         //在测试服务器节点执行BVT测试
         stage('Build Verification Test') {
-            agent {
-                docker{
-                    image 'postman/newman'  //在流水线中启动newman
-                }
-            }
+            agent any
             steps {                
                 echo "7. Run Build Verification Test in test environment"
-                System.setProperty("org.jenkinsci.plugins.durabletask.BourneShellScript.HEARTBEAT_CHECK_INTERVAL","86400")
                 sh 'newman run pipeline/${TEST_SCRIPT}'
             }
         }
