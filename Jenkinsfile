@@ -73,7 +73,7 @@ pipeline {
                 echo "7. Run Build Verification Test in test environment"
                 sh '''
                 docker pull postman/newman
-                docker run --rm -t postman/new run pipeline/${NEWMAN_COLLECTION}
+                docker run --rm --name newman -t postman/newman run pipeline/${NEWMAN_COLLECTION} 
                 '''
             }
         }
