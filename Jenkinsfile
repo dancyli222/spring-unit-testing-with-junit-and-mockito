@@ -71,7 +71,10 @@ pipeline {
             agent any
             steps {                
                 echo "7. Run Build Verification Test in test environment"
-                sh 'newman run pipeline/${TEST_SCRIPT}'
+                sh '''
+                docker pull postman/newman
+                docker run --rm -t postman/new run pipeline/${NEWMAN_COLLECTION}
+                '''
             }
         }
     }
