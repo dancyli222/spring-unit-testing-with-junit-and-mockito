@@ -62,7 +62,7 @@ pipeline {
                 sh '''
                 docker login -u ${DOCKER_ID} -p ${DOCKER_PASSWORD}
                 docker pull ${DOCKER_ID}/${IMAGE_NAME}:latest
-                docker run --name ${IMAGE_NAME} -p 9001:9001 -d ${DOCKER_ID}/${IMAGE_NAME}:latest
+                docker run --name ${CONTAINER_NAME} -p 9001:9001 -d ${DOCKER_ID}/${IMAGE_NAME}:latest
                 '''
             }                
         }
@@ -73,7 +73,7 @@ pipeline {
                 echo "7. Run Build Verification Test in test environment"
                 sh '''
                 docker pull postman/newman
-                docker run --rm --name newman -volumes-from ${IMAGE_NAME} -d /home/local/project/pipeline/Sample-Collection.postman_collection.json 
+                docker run --rm --name newman --volumes-from ${CONTAINER_NAME} -d ${Test_SCRIPT}  
                 '''
             }
         }
@@ -82,8 +82,9 @@ pipeline {
         GIT_PROJECT_ADDR='https://github.com/dancyli222/spring-unit-testing-with-junit-and-mockito.git'  //项目的git地址
         PROJECT_NAME='${JOB_NAME}'  //项目名称
         IMAGE_NAME = 'unit-testing'  //docker镜像名称，一般和项目名相同
+        CONTAINER_NAME = 'unit-testing'
         DOCKER_ID = 'jli7512'
         DOCKER_PASSWORD = 'Med68some'
-        TEST_SCRIPT = 'Sample-Collection.postman_collection.json'
+        TEST_SCRIPT = '/home/local/project/pipeline/Sample-Collection.postman_collection.json'
     }
 }

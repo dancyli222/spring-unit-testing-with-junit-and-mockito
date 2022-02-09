@@ -6,7 +6,7 @@ RUN mkdir -p /usr/local/project
 WORKDIR /usr/local/project
 # 将项目jar包复制到/usr/local/project目录下
 COPY target/unit-testing-0.0.1-SNAPSHOT.jar ./
-# 将BVT测试脚本文件复制到/usr/loca/project/pipeline目录下
+# 将接口测试脚本文件复制到/usr/loca/project/pipeline目录下
 COPY pipeline/*.json ./pipeline/
 # 暴露容器端口为9001 Docker镜像告知Docker宿主机应用监听了9001端口
 EXPOSE 9001
