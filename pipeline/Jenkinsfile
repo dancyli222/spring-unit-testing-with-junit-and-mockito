@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo '2. run unit test'
                 sh 'mvn -B org.jacoco:jacoco-maven-plugin:prepare-agent test'
-                jacoco changeBuildStatus:true,maximumLineCoverage:"70"
+                jacoco changeBuildStatus:true,maximumLineCoverage:"50"
             }
             post {
                 always {
